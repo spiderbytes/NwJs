@@ -1,0 +1,34 @@
+﻿XIncludeFile "NwJsRequester.sbi"
+
+Procedure SaveFileRequesterExCallback(Result.s)
+  Debug "Selected File: " + Result
+EndProcedure
+
+Procedure OpenFileRequesterExCallback(Result.s)
+  Protected Counter
+  For Counter = 1 To CountString(Result, ";") + 1
+    Debug "Selected File: " + StringField(Result, Counter, ";")
+  Next
+EndProcedure
+
+If IsNwJsAvailable() = #False
+  
+  Debug "Sorry! NwJs is not available :-("
+  
+Else
+  
+  UseModule NwJsRequester
+    
+    Debug InputRequester("Message", "DefaultText")
+    
+    Debug MessageRequester("This is a MessageRequester with an OK-Button")
+    
+    Debug MessageRequester("This is a MessageRequester with an OK- and a Cancel-Button", #PB_MessageRequester_YesNo)
+    
+    ; OpenFileRequesterEx(@OpenFileRequesterExCallback(), "", "", #PB_Requester_MultiSelection)
+    
+    ; SaveFileRequesterEx(@SaveFileRequesterExCallback())
+    
+  UnuseModule NwJsRequester
+  
+EndIf

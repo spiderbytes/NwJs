@@ -1,0 +1,49 @@
+﻿EnableExplicit
+
+XIncludeFile "NwJsCommon.sbi"
+
+DeclareModule  NwJsFs
+  
+  EnableExplicit
+  
+  Declare.s ReadFileSync  (Filename.s)
+  Declare   WriteFileSync (Filename.s, StringToWrite.s)
+  Declare   AppendFileSync(Filename.s, StringToAppend.s)
+  
+EndDeclareModule
+
+Module NwJsFs
+  
+  EnableExplicit
+  
+  Procedure.s ReadFileSync(Filename.s)
+    ; https://nodejs.org/docs/latest/api/fs.html#fs_fs_readfilesync_path_options
+    ! try {
+    !   var fs = nw.require('fs');
+    !   return fs.readFileSync(v_filename);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure AppendFileSync(Filename.s, StringToAppend.s)
+    ; https://nodejs.org/api/fs.html#fs_fs_appendfilesync_file_data_options
+    ! try {
+    !   var fs = nw.require('fs');
+    !   fs.appendFileSync(v_filename, v_stringtoappend);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure WriteFileSync(Filename.s, StringToWrite.s)
+    ; https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options
+    ! try {
+    !   var fs = require('fs');
+    !   fs.writeFileSync(v_filename, v_stringtowrite);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+EndModule

@@ -45,3 +45,11 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+*.sb.cfg
+*.sbi.cfg
+*.pb.cfg
+!cgi.pb.cfg
+*.pbi.cfg
+*.exe
+*.js
+*.html

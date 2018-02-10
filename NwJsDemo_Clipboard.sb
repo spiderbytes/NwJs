@@ -1,0 +1,25 @@
+﻿XIncludeFile "NwJsClipboard.sbi"
+
+If IsNwJsAvailable() = #False
+  
+  Debug "Sorry! NwJs is not available :-("
+  
+Else
+  
+  UseModule NwJsClipboard
+    
+    Debug "-> SetText()"
+    SetText("Hello! This is a Clipboard-Text set by NwJs. :-)")
+    
+    Debug "-> GetText()"
+    Debug "Clipboard-Content: " + GetText()
+    
+    Debug "-> Clear()"
+    Clear() ; Clear Clipboard-Content
+    
+    Debug "-> GetText()"
+    Debug "Clipboard-Content: " + GetText()
+    
+  UnuseModule NwJsClipboard
+  
+EndIf

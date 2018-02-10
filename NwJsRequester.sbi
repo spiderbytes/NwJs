@@ -1,0 +1,102 @@
+﻿EnableExplicit
+
+XIncludeFile "NwJsCommon.sbi"
+
+DeclareModule  NwJsRequester
+  
+  EnableExplicit
+  
+  Declare.s InputRequester(Message.s, DefaultText.s)
+  Declare   MessageRequester(Message.s, Flags = #PB_MessageRequester_Ok)
+  
+  Declare   SaveFileRequester(Callback, DefaultDirectory.s = "")
+  Declare   OpenFileRequesterEx(Callback, Patterns.s = "", DefaultDirectory.s = "", Flags = 0)
+  
+EndDeclareModule
+
+Module NwJsRequester
+  
+  EnableExplicit
+  
+  ; Javascript dialogs
+  ; Traditional javascript dialogs alert, confirm and prompt are supported in node-webkit.
+  ; The alert() method displays an alert box with a specified message and an OK button.
+  ; The confirm() method displays a dialog box with a specified message, along with an OK and a Cancel button.
+  ; The prompt() method displays a dialog box that prompts the visitor for input.  
+  
+  Procedure.s InputRequester(Message.s, DefaultText.s)
+    
+    ; If the user clicks "OK", the input value is returned.
+    ; If the user clicks "Cancel", null is returned.
+    ; If the user clicks "OK" without entering any text, an empty string is returned.    
+    
+    ! var returnValue = prompt(v_message, v_defaulttext);
+    ! // ...
+    ! return returnValue;
+    
+  EndProcedure
+  
+  Procedure MessageRequester(Message.s, Flags = #PB_MessageRequester_Ok)
+    
+    If Flags = #PB_MessageRequester_Ok
+      
+      ! alert(v_message);
+      ProcedureReturn #PB_MessageRequester_Ok
+      
+    Else
+      
+      ! if (confirm(v_message) == false) {
+      ProcedureReturn #PB_MessageRequester_Cancel
+      ! } else {
+      ProcedureReturn #PB_MessageRequester_Ok
+      ! }
+      
+    EndIf
+    
+  EndProcedure
+  
+  Procedure SaveFileRequester(Callback, DefaultDirectory.s = "")
+    
+    Protected nwworkingdir.s
+    
+    If DefaultDirectory
+      nwworkingdir = "nwworkingdir='" + DefaultDirectory + "'"
+    EndIf
+    
+    ! var chooser = $("<input style='display:none' type='file' nwsaveas " + v_nwworkingdir + " />");
+    ! chooser.appendTo($("Body"));
+    ! chooser.unbind('change');
+    ! chooser.change(function(evt) {
+    !   v_callback($(this).val());
+    !   chooser.remove();
+    ! });
+    ! chooser.trigger("click");  
+    
+  EndProcedure
+  
+  Procedure OpenFileRequesterEx(Callback, Patterns.s = "", DefaultDirectory.s = "", Flags = 0)
+    
+    Protected Multiple.s
+    
+    If (Flags | #PB_Requester_MultiSelection) = #PB_Requester_MultiSelection
+      Multiple = "multiple"  
+    EndIf
+    
+    Protected nwworkingdir.s
+    
+    If DefaultDirectory
+      nwworkingdir = "nwworkingdir='" + DefaultDirectory + "'"
+    EndIf
+    
+    ! var chooser = $("<input style='display:none' type='file' " + v_multiple + " accept='" + v_patterns + "' " + v_nwworkingdir + " />");
+    ! chooser.appendTo($("Body"));
+    ! chooser.unbind('change');
+    ! chooser.change(function(evt) {
+    !   v_callback($(this).val());
+    !   chooser.remove();
+    ! });
+    ! chooser.trigger("click");  
+    
+  EndProcedure  
+  
+EndModule

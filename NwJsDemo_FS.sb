@@ -1,0 +1,22 @@
+﻿XIncludeFile "NwJsFs.sbi"
+
+If IsNwJsAvailable() = #False
+  
+  Debug "Sorry! NwJs is not available :-("
+  
+Else
+  
+  UseModule NwJsFs
+    
+    Define FileContent
+    
+    ; FileContent = ReadFileSync([YourFileName])
+    
+    ; WriteFileSync ([YourFileName], [StringToWrite])
+    
+    ; AppendFileSync([YourFileName], [StringToAppend])
+    
+  UnuseModule NwJsFs  
+  
+EndIf
+

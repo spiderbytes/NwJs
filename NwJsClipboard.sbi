@@ -1,0 +1,55 @@
+﻿EnableExplicit
+
+XIncludeFile "NwJsCommon.sbi"
+
+DeclareModule  NwJsClipboard
+  
+  EnableExplicit
+  
+  Declare   Get()
+  Declare   SetText(Text.s, Clipboard = #PB_Ignore)
+  Declare.s GetText(Clipboard = #PB_Ignore)
+  Declare   Clear(Clipboard = #PB_Ignore)
+  
+EndDeclareModule
+
+Module NwJsClipboard
+  
+  EnableExplicit
+  
+  Procedure Get()
+    ! try {
+    !   return nw.Clipboard.get();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure SetText(Text.s, Clipboard = #PB_Ignore)
+    If Clipboard = #PB_Ignore : Clipboard = Get() : EndIf
+    ! try {
+    !   v_clipboard.set(v_text, 'text');
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s GetText(Clipboard = #PB_Ignore)
+    If Clipboard = #PB_Ignore : Clipboard = Get() : EndIf
+    ! try {
+    !   return v_clipboard.get('text');
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure Clear(Clipboard = #PB_Ignore)
+    If Clipboard = #PB_Ignore : Clipboard = Get() : EndIf
+    ! try {
+    !   return v_clipboard.clear();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+EndModule

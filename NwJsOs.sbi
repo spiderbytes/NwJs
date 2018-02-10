@@ -1,0 +1,220 @@
+﻿EnableExplicit
+
+XIncludeFile "NwJsCommon.sbi"
+
+DeclareModule  NwJsOs
+  
+  EnableExplicit
+  
+  Declare.s EOL()
+  Declare.s Arch()
+  Declare   Constants()
+  Declare   Cpus()
+  Declare.s Endianness()
+  Declare   Freemem()
+  Declare.s Homedir()
+  Declare.s Hostname()
+  Declare   LoadAvg()
+  Declare   NetworkInterfaces()
+  Declare.s Platform()
+  Declare.s Release()
+  Declare.s Tmpdir()
+  Declare   Totalmem()
+  Declare.s Type()
+  Declare   Uptime()
+  Declare   UserInfo(Options = #PB_Ignore)
+  
+EndDeclareModule
+
+Module NwJsOs
+  
+  EnableExplicit
+  
+  Procedure.s EOL()
+    ; https://nodejs.org/api/os.html#os_os_eol
+    ; A string constant defining the operating system-specific end-of-line marker:
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.EOL;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Arch()
+    ; https://nodejs.org/api/os.html#os_os_arch
+    ; The os.arch() method returns a string identifying the operating system CPU architecture for which the Node.js binary was compiled.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.arch;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure Constants()
+    ; https://nodejs.org/api/os.html#os_os_constants
+    ; Returns an object containing commonly used operating system specific constants for error codes, process signals, and so on.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.constants;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure Cpus()
+    ; https://nodejs.org/api/os.html#os_os_cpus
+    ; The os.cpus() method returns an array of objects containing information about each logical CPU core.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.cpus();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Endianness()
+    ; https://nodejs.org/api/os.html#os_os_endianness
+    ; The os.endianness() method returns a string identifying the endianness of the CPU for which the Node.js binary was compiled.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.endianness;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure Freemem()
+    ; https://nodejs.org/api/os.html#os_os_freemem
+    ; The os.freemem() method returns the amount of free system memory in bytes as an integer.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.freemem;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Homedir()
+    ; https://nodejs.org/api/os.html#os_os_homedir
+    ; The os.homedir() method returns the home directory of the current user as a string.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.homedir;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Hostname()
+    ; https://nodejs.org/api/os.html#os_os_hostname
+    ; The os.hostname() method returns the hostname of the operating system as a string.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.hostname;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure LoadAvg()
+    ; https://nodejs.org/api/os.html#os_os_loadavg
+    ; The os.loadavg() method returns an array containing the 1, 5, and 15 minute load averages.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.loadavg();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure NetworkInterfaces()
+    ; https://nodejs.org/api/os.html#os_os_networkinterfaces
+    ; The os.networkInterfaces() method returns an object containing only network interfaces that have been assigned a network address.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.networkInterfaces();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Platform()
+    ; https://nodejs.org/api/os.html#os_os_platform
+    ; The os.platform() method returns a string identifying the operating system platform as set during compile time of Node.js.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.platform;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Release()
+    ; https://nodejs.org/api/os.html#os_os_release
+    ; The os.release() method returns a string identifying the operating system release.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.release;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Tmpdir()
+    ; https://nodejs.org/api/os.html#os_os_tmpdir
+    ; The os.tmpdir() method returns a string specifying the operating system's default directory for temporary files.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.tmpdir;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure Totalmem()
+    ; https://nodejs.org/api/os.html#os_os_totalmem
+    ; The os.totalmem() method returns the total amount of system memory in bytes as an integer.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.totalmem;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure.s Type()
+    ; https://nodejs.org/api/os.html#os_os_type
+    ; The os.type() method returns a string identifying the operating system name as returned by uname(3). For example 'Linux' on Linux, 'Darwin' on macOS and 'Windows_NT' on Windows.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.type;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure Uptime()
+    ; https://nodejs.org/api/os.html#os_os_uptime
+    ; The os.uptime() method returns the system uptime in number of seconds.
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.uptime;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure UserInfo(Options = #PB_Ignore)
+    ; https://nodejs.org/api/os.html#os_os_userinfo_options
+    ; The os.userInfo() method returns information about the currently effective user
+    ! try {
+    !   var os = nw.require('os');
+    !   return os.userInfo();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+EndModule

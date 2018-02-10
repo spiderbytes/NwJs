@@ -1,0 +1,42 @@
+﻿EnableExplicit
+
+XIncludeFile "NwJsOs.sbi"
+
+Procedure.s ToJsonString(o)
+  ! return JSON.stringify(v_o);
+EndProcedure
+
+If IsNwJsAvailable() = #False
+  
+  Debug "Sorry! NwJs is not available :-("
+  
+Else
+  
+  Define EOL.s = NwJsOs::EOL()
+  
+  Select EOL 
+    Case #LF$   : EOL = "#LF$"
+    Case #CRLF$ : EOL = "#CRLF$"
+    Case #LFCR$ : EOL = "#LFCR$"
+    Default     : EOL = "?"
+  EndSelect
+  
+  Debug "EOL(): "               + EOL + #CRLF$
+  Debug "Arch(): "              + NwJsOs::Arch() + #CRLF$
+  Debug "Constants(): "         + ToJsonString(NwJsOs::Constants()) + #CRLF$
+  Debug "Cpus(): "              + ToJsonString(NwJsOs::Cpus()) + #CRLF$
+  Debug "Endianness(): "        + NwJsOs::Endianness() + #CRLF$
+  Debug "Freemem(): "           + NwJsOs::Freemem() + #CRLF$
+  Debug "Homedir(): "           + NwJsOs::Homedir() + #CRLF$
+  Debug "Hostname(): "          + NwJsOs::Hostname() + #CRLF$
+  Debug "LoadAvg(): "           + ToJsonString(NwJsOs::LoadAvg()) + #CRLF$
+  Debug "NetworkInterfaces(): " + ToJsonString(NwJsOs::NetworkInterfaces()) + #CRLF$
+  Debug "Platform(): "          + NwJsOs::Platform() + #CRLF$
+  Debug "Release(): "           + NwJsOs::Release() + #CRLF$
+  Debug "Tmpdir(): "            + NwJsOs::Tmpdir() + #CRLF$
+  Debug "Totalmem(): "          + NwJsOs::Totalmem() + #CRLF$
+  Debug "Type(): "              + NwJsOs::Type() + #CRLF$
+  Debug "Uptime(): "            + NwJsOs::Uptime() + #CRLF$
+  Debug "UserInfo(): "          + ToJsonString(NwJsOs::UserInfo()) + #CRLF$
+  
+EndIf

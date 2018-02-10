@@ -1,0 +1,479 @@
+﻿EnableExplicit
+
+XIncludeFile "NwJsCommon.sbi"
+
+DeclareModule NwJsWin
+  
+  EnableExplicit
+  
+  Declare Blur(Window = #PB_Ignore)
+  Declare Close(Force = #False, Window = #PB_Ignore)
+  Declare CloseDevTools(Window = #PB_Ignore)
+  Declare EnterFullscreen(Window = #PB_Ignore)
+  Declare EnterKioskMode(Window = #PB_Ignore)
+  Declare Focus(Window = #PB_Ignore)
+  Declare Get()
+  Declare GetHeight(Window = #PB_Ignore)
+  Declare GetPrinters(Callback, Window = #PB_Ignore)
+  Declare GetWidth(Window = #PB_Ignore)
+  Declare GetX(Window = #PB_Ignore)
+  Declare GetY(Window = #PB_Ignore)
+  Declare Hide(Window = #PB_Ignore)
+  Declare LeaveFullscreen(Window = #PB_Ignore)
+  Declare LeaveKioskMode(Window = #PB_Ignore)
+  Declare Maximize(Window = #PB_Ignore)
+  Declare Minimize(Window = #PB_Ignore)
+  Declare MoveBy(X.i, Y.i, Window = #PB_Ignore)
+  Declare MoveTo(X.i, Y.i, Window = #PB_Ignore)
+  Declare Print(Options = #PB_Ignore, Window = #PB_Ignore)  
+  Declare Reload(Window = #PB_Ignore)
+  Declare ReloadIgnoringCache(Window = #PB_Ignore)
+  Declare ResizeBy(Width.i, Height.i, Window = #PB_Ignore)
+  Declare ResizeTo(Width.i, Height.i, Window = #PB_Ignore)
+  Declare RestoreWin(Window = #PB_Ignore)
+  Declare SetAlwaysOnTop(Top, Window = #PB_Ignore)
+  Declare SetHeight(Height.i, Window = #PB_Ignore)
+  Declare SetMaximumSize(Width.i, Height.i, Window = #PB_Ignore)
+  Declare SetMinimumSize(Width.i, Height.i, Window = #PB_Ignore)
+  Declare SetResizable(Resizable, Window = #PB_Ignore)
+  Declare SetTitle(Title.s, Window = #PB_Ignore) 
+  Declare SetWidth(Width.i, Window = #PB_Ignore)
+  Declare SetX(X.i, Window = #PB_Ignore)
+  Declare SetY(Y.i, Window = #PB_Ignore)
+  Declare Show(IsShow = #True, Window = #PB_Ignore)
+  Declare ShowDevTools(Window = #PB_Ignore)
+  Declare ToggleFullscreen(Window = #PB_Ignore)
+  Declare ToggleKioskMode(Window = #PB_Ignore)
+  Declare Unmaximize(Window = #PB_Ignore)
+  Declare.s GetTitle(Window = #PB_Ignore)
+  
+EndDeclareModule
+
+Module NwJsWin
+  
+  EnableExplicit
+      
+  Procedure Get() 
+    ; Get the current window
+    ; http://docs.nwjs.io/en/latest/References/Window/#windowgetwindow_object
+    ! try {
+    !   return nw.Window.get();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure SetX(X.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winx
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.x = v_x;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure GetX(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winx
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   return v_window.x;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure SetY(Y.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winy
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.y = v_y;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure GetY(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winy
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   return v_window.y;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure SetWidth(Width.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winwidth
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.width = v_width;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure GetWidth(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winwidth
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   return v_window.width;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure SetHeight(Height.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winheight
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.height = v_height;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure GetHeight(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winheight
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   return v_window.height;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure SetTitle(Title.s, Window = #PB_Ignore) 
+    ; http://docs.nwjs.io/en/latest/References/Window/#wintitle
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.title = v_title;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure.s GetTitle(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#wintitle
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   return v_window.title;
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure MoveTo(X.i, Y.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winmovetox-y
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.moveTo(v_x, v_y);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure MoveBy(X.i, Y.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winmovebyx-y
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.moveBy(v_x, v_y);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure ResizeTo(Width.i, Height.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winresizetowidth-height
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.resizeTo(v_width, v_height);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure ResizeBy(Width.i, Height.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winresizebywidth-height
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.resizeBy(v_width, v_height);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Focus(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winfocus
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.focus();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Blur(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winblur
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.blur();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Show(IsShow = #True, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winshowis_show
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.show(v_isshow);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Hide(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winhide
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.hide();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Close(Force = #False, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#wincloseforce
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    If Force
+      ! v_window.close(true);
+    Else
+      ! v_window.close(false);
+    EndIf
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Reload(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winreload
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.reload();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure ReloadIgnoringCache(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winreloadignoringcache
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.reloadIgnoringCache();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Maximize(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winmaximize
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.maximize();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Unmaximize(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winunmaximize
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.unmaximize();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Minimize(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winminimize
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.minimize();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure RestoreWin(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winrestore
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.restore();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure EnterFullscreen(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winenterfullscreen
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.enterFullscreen();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure LeaveFullscreen(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winleavefullscreen
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.leaveFullscreen();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure ToggleFullscreen(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#wintogglefullscreen
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.toggleFullscreen();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure EnterKioskMode(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winenterkioskmode
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.enterKioskMode();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure LeaveKioskMode(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winleavekioskmode
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.leaveKioskMode();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure ToggleKioskMode(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#wintogglekioskmode
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.toggleKioskMode();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure GetPrinters(Callback, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#wingetprinterscallback
+    ; Enumerate the printers in the system. The callback function will receive an array of JSON objects for the printer information. The device name of the JSON object can be used as parameter in 
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.getPrinters(v_callback);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }    
+  EndProcedure
+  
+  Procedure Print(Options = #PB_Ignore, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#wingetprinterscallback
+    ; Print the web contents in the window with or without the need for user’s interaction
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    If Options = #PB_Ignore
+      ! v_options = {};
+    EndIf
+    ! try {
+    !   v_window.print(v_options);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure SetMaximumSize(Width.i, Height.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winsetmaximumsizewidth-height
+    ; Set windows maximum size.
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.setMaximumSize(v_width, v_height);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure SetMinimumSize(Width.i, Height.i, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winsetminimumsizewidth-height
+    ; Set windows minimum size.
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    !   v_window.setMinimumSize(v_width, v_height);
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure SetResizable(Resizable, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winsetresizableresizable
+    ; Set whether window is resizable.
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    If Resizable
+      ! v_window.setResizable(true);
+    Else
+      ! v_window.setResizable(false);
+    EndIf
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure SetAlwaysOnTop(Top, Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winsetalwaysontoptop
+    ; Sets the widget to be on top of all other windows in the window system.
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    If Top
+      ! v_window.setAlwaysOnTop(true);
+    Else
+      ! v_window.setAlwaysOnTop(false);
+    EndIf
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure ShowDevTools(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winshowdevtoolsiframe-callback
+    ; Open the devtools to inspect the window.
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    ! v_window.showDevTools();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+  Procedure CloseDevTools(Window = #PB_Ignore)
+    ; http://docs.nwjs.io/en/latest/References/Window/#winclosedevtools
+    ; Close the devtools window.
+    If Window = #PB_Ignore : Window = Get() : EndIf
+    ! try {
+    ! v_window.closeDevTools();
+    ! } catch (err) {
+    !   spider.debug.Print(err.message);
+    ! }
+  EndProcedure
+  
+EndModule

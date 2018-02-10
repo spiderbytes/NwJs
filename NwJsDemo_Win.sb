@@ -1,0 +1,202 @@
+﻿XIncludeFile "NwJsWin.sbi"
+
+#Dialog = 0
+#HideTimer = 0
+
+Procedure.s ToJsonString(o)
+  ! return JSON.stringify(v_o);
+EndProcedure
+
+Procedure GetPrintersCallback(PrintersArray)
+  
+  Debug ToJsonString(PrintersArray)
+  
+EndProcedure
+
+Procedure HideTimerCallback()
+  RemoveWindowTimer(DialogWindow(#Dialog), #HideTimer)
+  NwJsWin::Show()
+  ! alert("Hello again! :o)");
+EndProcedure
+
+Runtime Procedure WinButtonEvent()
+  
+  Static Resizable   = #True
+  Static AlwaysOnTop = #False
+  
+  UseModule NwJsWin
+    
+    Select StringField( GetGadgetText(EventGadget()), 1, "(")
+        
+      Case "SetX"                : SetX(100)
+      Case "GetX"                : Debug GetX()
+      Case "SetY"                : SetY(100)
+      Case "GetY"                : Debug GetY()
+      Case "SetWidth"            : SetWidth(300)
+      Case "GetWidth"            : Debug GetWidth()
+      Case "SetHeight"           : SetHeight(300)
+      Case "GetHeight"           : Debug GetHeight()
+      Case "MoveTo"              : MoveTo(100, 100)
+      Case "MoveBy"              : MoveBy(10, 10)
+      Case "ResizeTo"            : ResizeTo(800, 800)
+      Case "ResizeBy"            : ResizeBy(10, 10)
+      Case "SetTitle"            : SetTitle("New title")
+      Case "GetTitle"            : Debug GetTitle()
+      Case "Focus"               : Focus()
+      Case "Blur"                : Blur()
+      Case "Show"                : Show()
+      Case "Hide"
+        
+        ! alert("I'll be back in 2 seconds.");
+        
+        Hide()
+        AddWindowTimer(DialogWindow(#Dialog), #HideTimer, 2000)
+        BindEvent(#PB_Event_Timer, @HideTimerCallback(), DialogWindow(#Dialog))
+        
+      Case "Close"               : Close()
+      Case "Reload"              : Reload()
+      Case "ReloadIgnoringCache" : ReloadIgnoringCache()
+      Case "Maximize"            : Maximize()
+      Case "Unmaximize"          : Unmaximize()
+      Case "Minimize"            : Minimize()
+      Case "RestoreWin"          : RestoreWin()
+      Case "EnterFullscreen"     : EnterFullscreen()
+      Case "LeaveFullscreen"     : LeaveFullscreen()
+      Case "ToggleFullscreen"    : ToggleFullscreen()
+      Case "EnterKioskMode"      : EnterKioskMode()
+      Case "LeaveKioskMode"      : LeaveKioskMode()
+      Case "ToggleKioskMode"     : ToggleKioskMode()
+      Case "GetPrinters"         : GetPrinters(@GetPrintersCallback())
+      Case "Print"               : Print()
+        
+      Case "SetMaximumSize" : SetMaximumSize(1200, 900)
+      Case "SetMinimumSize" : SetMinimumSize(1000, 700)
+        
+        
+      Case "SetResizable"
+        
+        If Resizable
+          Resizable = #False
+          SetGadgetText(EventGadget(), "SetResizable(#True)")
+        Else
+          Resizable = #True
+          SetGadgetText(EventGadget(), "SetResizable(#False)")
+        EndIf
+        SetResizable(Resizable)
+        
+      Case "SetAlwaysOnTop" 
+        
+        If AlwaysOnTop
+          AlwaysOnTop = #False
+          SetGadgetText(EventGadget(), "SetAlwaysOnTop(#True)")
+        Else
+          AlwaysOnTop = #True
+          SetGadgetText(EventGadget(), "SetAlwaysOnTop(#False)")
+        EndIf
+        SetAlwaysOnTop(AlwaysOnTop)
+        
+      Case "ShowDevTools"   : ShowDevTools()
+      Case "CloseDevTools"  : CloseDevTools()
+        
+    EndSelect
+    
+  UnuseModule NwJsWin
+  
+EndProcedure
+
+Procedure Main()
+  
+  Protected sXML.s
+  Protected oXML
+  
+  sXML = "<window id='#PB_Any' name='NwJsDemo_Win' text='Available Win-Commands' minwidth='600' flags='#PB_Window_SizeGadget'>" +
+         " <vbox>" + 
+         "  <frame text='X &amp; Y'> " + 
+         "    <gridbox columns='2' colexpand='equal'>" +
+         "      <button text='SetX(100)' onevent='WinButtonEvent()' />" +
+         "      <button text='GetX()'    onevent='WinButtonEvent()' />" +
+         "      <button text='SetY(100)' onevent='WinButtonEvent()' />" +
+         "      <button text='GetY()'    onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         "  <frame text='Width &amp; Height'> " + 
+         "    <gridbox columns='2' colexpand='equal'>" +
+         "        <button text='SetWidth(300)'  onevent='WinButtonEvent()' />" +
+         "        <button text='GetWidth()'     onevent='WinButtonEvent()' />" +
+         "        <button text='SetHeight(300)' onevent='WinButtonEvent()' />" +
+         "        <button text='GetHeight()'    onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         "  <frame text='Move &amp; Resize'> " + 
+         "    <gridbox columns='2' colexpand='equal'>" +
+         "        <button text='MoveTo(100, 100)'   onevent='WinButtonEvent()' />" +
+         "        <button text='MoveBy(10, 10)'     onevent='WinButtonEvent()' />" +
+         "        <button text='ResizeTo(800, 800)' onevent='WinButtonEvent()' />" +
+         "        <button text='ResizeBy(10, 10)'   onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         "  <frame text='Minimize &amp; Maximize'> " + 
+         "    <gridbox columns='2' colexpand='equal'>" +
+         "        <button text='Maximize()'   onevent='WinButtonEvent()' />" +
+         "        <button text='Unmaximize()' onevent='WinButtonEvent()' />" +
+         "        <button text='Minimize()'   onevent='WinButtonEvent()' />" +
+         "        <button text='RestoreWin()' onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         "  <frame text='Fullscreen'> " + 
+         "    <gridbox columns='3' colexpand='equal'>" +
+         "        <button text='EnterFullscreen()'  onevent='WinButtonEvent()' />" +
+         "        <button text='LeaveFullscreen()'  onevent='WinButtonEvent()' />" +
+         "        <button text='ToggleFullscreen()' onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         "  <frame text='Kiosk'> " + 
+         "    <gridbox columns='3' colexpand='equal'>" +
+         "        <button text='EnterKioskMode()'  onevent='WinButtonEvent()' />" +
+         "        <button text='LeaveKioskMode()'  onevent='WinButtonEvent()' />" +
+         "        <button text='ToggleKioskMode()' onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         "  <frame text='Misc'> " + 
+         "    <gridbox columns='3' colexpand='equal'>" +
+         ~"       <button text='SetTitle(\"New title\")'   onevent='WinButtonEvent()' />" +
+         "        <button text='GetTitle()'                onevent='WinButtonEvent()' />" +
+         "        <button text='Focus()'                   onevent='WinButtonEvent()' />" +
+         "        <button text='Blur()'                    onevent='WinButtonEvent()' />" +
+         "        <button text='Show()'                    onevent='WinButtonEvent()' />" +
+         "        <button text='Hide()'                    onevent='WinButtonEvent()' />" +
+         "        <button text='Close()'                   onevent='WinButtonEvent()' />" +
+         "        <button text='Reload()'                  onevent='WinButtonEvent()' />" +
+         "        <button text='ReloadIgnoringCache()'     onevent='WinButtonEvent()' />" +
+         "        <button text='GetPrinters()'             onevent='WinButtonEvent()' />" +
+         "        <button text='Print()'                   onevent='WinButtonEvent()' />" +
+         "        <button text='SetMaximumSize(1200, 900)' onevent='WinButtonEvent()' />" +
+         "        <button text='SetMinimumSize(1000, 700)' onevent='WinButtonEvent()' />" +
+         "        <button text='SetResizable(#False)'      onevent='WinButtonEvent()' />" +
+         "        <button text='SetAlwaysOnTop(#True)'     onevent='WinButtonEvent()' />" +
+         "        <button text='ShowDevTools()'            onevent='WinButtonEvent()' />" +
+         "        <button text='CloseDevTools()'           onevent='WinButtonEvent()' />" +
+         "    </gridbox>" +
+         "  </frame> " + 
+         " </vbox>" +
+         "</window>"
+  
+  oXML = ParseXML(#PB_Any, sXML)
+  
+  If oXML And XMLStatus(oXML) = #PB_XML_Success
+    If CreateDialog(#Dialog) And OpenXMLDialog(#Dialog, oXML, "NwJsDemo_Win", 20, 20)
+      ;
+    Else
+      Debug "Dialog error: " + DialogError(#Dialog)
+    EndIf
+  Else
+    Debug "XML error: " + XMLError(oXML) + " (Line: " + XMLErrorLine(oXML) + ")"
+  EndIf
+  
+EndProcedure
+
+If IsNwJsAvailable() = #False
+  Debug "Sorry! NwJs is not available :-("
+EndIf
+
+Main()

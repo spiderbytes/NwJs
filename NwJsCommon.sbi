@@ -1,0 +1,7 @@
+﻿; Common Procedures...
+
+CompilerIf Not Defined(IsNwJsAvailable, #PB_Procedure)
+  Procedure IsNwJsAvailable()
+    ! return (typeof nw != 'undefined');    
+  EndProcedure
+CompilerEndIf
